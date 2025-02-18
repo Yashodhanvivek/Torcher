@@ -4,13 +4,13 @@ import numpy as np
 from scipy.stats import ks_2samp
 
 
-class MyModel(nn.Module):  # Example - REPLACE with your actual model
+class MyModel(nn.Module): 
     def __init__(self):
         super().__init__()
-        # Example - REPLACE with your actual layers and sizes
-        self.fc1 = nn.Linear(12, 10)  # Example: Input 12, Output 10
-        self.fc2 = nn.Linear(10, 2)   # Example: Input 10, Output 2
-        self.fc3 = nn.Linear(2, 3)    # Example: Input 2, Output 3
+        
+        self.fc1 = nn.Linear(12, 10)  
+        self.fc2 = nn.Linear(10, 2)   
+        self.fc3 = nn.Linear(2, 3)    
 
     def forward(self, x):
         x = self.fc1(x)
@@ -32,7 +32,7 @@ def get_model_outputs(model, data):
 
 def statistical_attack(model_path, data1, data2):
     try:
-        model = MyModel()  # Create an instance of your model
+        model = MyModel()  
         state_dict = torch.load(model_path, weights_only=True)
         model.load_state_dict(state_dict)
         print(f"Model loaded successfully from: {model_path}")
@@ -57,16 +57,12 @@ def statistical_attack(model_path, data1, data2):
 
 
 if __name__ == "__main__":
-    # 1. Load your data (REPLACE with your actual data loading)
-    # data1: Your "normal" or baseline data
-    # data2: The data you want to compare (potentially anomalous)
-
-    # Example: Creating dummy data - REPLACE with your data!
-    data1 = torch.randn(100, 12)  # Example: 100 samples, 12 features (MATCHES fc1 input)
-    data2 = torch.randn(100, 12) + torch.randn(100,12) * 0.5 # Example: data with added noise
+  
+    data1 = torch.randn(100, 12)  
+    data2 = torch.randn(100, 12) + torch.randn(100,12) * 0.5 # data with added noise
 
  
-    model_path = "model.pth"  # Replace with the actual path to your .pth file
+    model_path = "model.pth"  
 
   
     statistical_attack(model_path, data1, data2)
