@@ -3,8 +3,7 @@ import torch.nn as nn
 import numpy as np
 from scipy.stats import ks_2samp
 
-# 1. Define YOUR model class (THIS IS THE MOST IMPORTANT PART)
-# REPLACE THIS EXAMPLE WITH YOUR ACTUAL MODEL ARCHITECTURE
+
 class MyModel(nn.Module):  # Example - REPLACE with your actual model
     def __init__(self):
         super().__init__()
@@ -19,7 +18,7 @@ class MyModel(nn.Module):  # Example - REPLACE with your actual model
         x = self.fc3(x)
         return x
 
-# 2. Function to generate model outputs (unchanged)
+
 def get_model_outputs(model, data):
     model.eval()
     outputs = []
@@ -30,7 +29,7 @@ def get_model_outputs(model, data):
             outputs.append(output.numpy())
     return np.concatenate(outputs)
 
-# 3. Statistical attack function (Kolmogorov-Smirnov test example)
+
 def statistical_attack(model_path, data1, data2):
     try:
         model = MyModel()  # Create an instance of your model
@@ -56,7 +55,7 @@ def statistical_attack(model_path, data1, data2):
     else:
         print("Fail to reject the null hypothesis: Distributions are not significantly different.")
 
-# 4. Example usage (using your existing .pth model)
+
 if __name__ == "__main__":
     # 1. Load your data (REPLACE with your actual data loading)
     # data1: Your "normal" or baseline data
@@ -66,8 +65,8 @@ if __name__ == "__main__":
     data1 = torch.randn(100, 12)  # Example: 100 samples, 12 features (MATCHES fc1 input)
     data2 = torch.randn(100, 12) + torch.randn(100,12) * 0.5 # Example: data with added noise
 
-    # 2. Provide the path to your .pth model
+ 
     model_path = "model.pth"  # Replace with the actual path to your .pth file
 
-    # 3. Perform the statistical attack
+  
     statistical_attack(model_path, data1, data2)
